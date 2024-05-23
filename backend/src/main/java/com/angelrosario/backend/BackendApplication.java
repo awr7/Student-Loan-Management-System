@@ -1,13 +1,13 @@
-package com.angelrosario.student_loan_management;
+package com.angelrosario.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StudentLoanManagementApplication {
+public class BackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StudentLoanManagementApplication.class, args);
+		SpringApplication.run(BackendApplication.class, args);
 	}
 
 }
