@@ -29,10 +29,7 @@ public class WebSecurityConfig {
                                 .requestMatchers("/api/v*/registration/**").permitAll()
                                 .anyRequest().authenticated()
                 )
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .permitAll()
-                );
+                .formLogin(withDeafults -> withDeafults.defaultSuccessUrl("/").permitAll());
         return http.build();
     }
 
