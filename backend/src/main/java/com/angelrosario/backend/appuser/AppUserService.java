@@ -33,6 +33,8 @@ public class AppUserService implements UserDetailsService{
         boolean userExist = appUserRepository.findByEmail(appUser.getEmail()).isPresent();
 
         if (userExist) {
+            // TODO check of attributes are the same and
+            // TODO if email not confirmed send confirmation email.
             throw new IllegalStateException("email already taken");
         }
 
@@ -51,8 +53,6 @@ public class AppUserService implements UserDetailsService{
         );
 
         confirmationTokenService.saveConfirmationToken(confirmationToken);
-
-        //TODO: send da email
 
         return token;
     }
