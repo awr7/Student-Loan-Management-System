@@ -5,17 +5,23 @@
         <div class="login-form-subtitle">
             Or <a href="#">register for a new account</a>
         </div>
-        <div class="login-form-input">
-            <input class="input" type="text" placeholder="Email">
-            <input class="input" type="password" placeholder="Password">
-        </div>
-        <div class="auth-options">
-            <div class="remember-me">
-                <input type="checkbox" id="remember-me"> <label for="remember-me">Remember me</label>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-credentials">
+            <div class="login-form-input">
+                <div *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].invalid">
+                    <span *ngIf="loginForm.controls['username'].errors?.['required']">Email is required.</span>
+                    <span *ngIf="loginForm.controls['username'].errors?.['email']">Please enter a valid email.</span>
+                </div>
+                <input class="input" type="email" formControlName="username" placeholder="Email">
+                <input class="input" type="password" formControlName="password" placeholder="Password">
             </div>
-            <a href="#" class="forgot-password">Forgot password?</a>
-        </div>
-        <button class="login-button">Sign in</button>
+            <div class="auth-options">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember-me"> <label for="remember-me">Remember me</label>
+                </div>
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+            <button class="login-button">Sign in</button>
+        </form>
     </div>
     <img class="login-image" src="../../assets/loginImage.jpg" alt="Login Image">
 </div>

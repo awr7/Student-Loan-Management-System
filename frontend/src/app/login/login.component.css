@@ -13,6 +13,8 @@
 
 .login-image {
     width: 50%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .login-form {
@@ -35,11 +37,23 @@
     font-weight: 500;
 }
 
+.login-credentials {
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+}
+
 .login-form-input {
     display: flex;
     flex-direction: column;
     gap: 11px;
     width: 333px;
+}
+
+.login-form-input div {
+    font-size: 14px;
+    align-self: flex-start;
+    color: red;
 }
 
 .input {
