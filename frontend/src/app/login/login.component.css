@@ -83,3 +83,13 @@
     font-weight: 600;
     cursor: pointer;
 }
+
+@media (max-width: 768px) {
+    .login-image{
+        display: none;
+    }
+
+    .login-form {
+        width: 100%;
+    }
+}
