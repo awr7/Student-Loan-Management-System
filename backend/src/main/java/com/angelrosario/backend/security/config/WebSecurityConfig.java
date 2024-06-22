@@ -12,6 +12,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.angelrosario.backend.appuser.AppUserService;
+import com.angelrosario.backend.security.CustomAuthenticationFailureHandler;
+import com.angelrosario.backend.security.CustomAuthenticationSuccessHandler;
 
 import lombok.AllArgsConstructor;
 
@@ -22,6 +24,8 @@ public class WebSecurityConfig {
     
     private final AppUserService appUserService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final CustomAuthenticationFailureHandler CustomAuthenticationFailureHandler;
+    private final CustomAuthenticationSuccessHandler CustomAuthenticationSuccessHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -31,7 +35,10 @@ public class WebSecurityConfig {
                                 .requestMatchers("/api/v*/registration/**").permitAll()
                                 .anyRequest().authenticated()
                 )
-                .formLogin(withDeafults -> withDeafults.defaultSuccessUrl("/").permitAll());
+                .formLogin(withDeafults -> withDeafults
+                .successHandler(CustomAuthenticationSuccessHandler)
+                .failureHandler(CustomAuthenticationFailureHandler)
+                .permitAll());
         return http.build();
     }
 

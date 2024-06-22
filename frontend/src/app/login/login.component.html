@@ -11,6 +11,7 @@
                     <span *ngIf="loginForm.controls['username'].errors?.['required']">Email is required.</span>
                     <span *ngIf="loginForm.controls['username'].errors?.['email']">Please enter a valid email.</span>
                 </div>
+                <div *ngIf="loginForm.valid && errorMessage" class="error-message">{{errorMessage}}</div>
                 <input class="input" type="email" formControlName="username" placeholder="Email">
                 <input class="input" type="password" formControlName="password" placeholder="Password">
             </div>

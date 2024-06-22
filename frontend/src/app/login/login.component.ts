@@ -12,17 +12,26 @@ import { CommonModule } from '@angular/common';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  errorMessage: string | null = null;
 
   constructor() {
     this.loginForm = new FormGroup({
       username: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl('')
     });
+
+    this.loginForm.statusChanges.subscribe(status => {
+      if (status === 'VALID') {
+        this.errorMessage = null;
+      }
+    });
   }
+
 
   async onSubmit() {
     try {
       if (this.loginForm.valid) {
+        this.errorMessage = null;
         const formData = new URLSearchParams();
         formData.append('username', this.loginForm.get('username')?.value);
         formData.append('password', this.loginForm.get('password')?.value);
@@ -35,8 +44,14 @@ export class LoginComponent {
           body: formData.toString(),
           credentials: 'include'
         });
-        const data = await response.json();
-        console.log(data);
+        if (response.status === 401) {
+          const errorMessage = await response.json();
+          this.errorMessage = errorMessage;
+          console.error('Login failed:', errorMessage);
+        } else if (response.ok) {
+          const data = await response.json();
+          console.log('Login successful:', data);
+        }
       }
     } catch (error) {
       console.error('Error in onSubmit', error);
