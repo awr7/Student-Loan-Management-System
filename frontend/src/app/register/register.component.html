@@ -1,0 +1,39 @@
+<div class="register-container">
+    <img class="register-image" src="../../assets/registerImage.jpg" alt="Register Image">
+    <div class="register-form">
+        <div class="register-form-title">Create a Student Loan Management Account</div>
+        <div class="register-form-subtitle">
+            Or <a href="/login">sign in to your account</a>
+        </div>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-credentials">
+            <div class="register-form-input">
+                <div class="double-input">
+                    <div *ngIf="registerForm.valid && errorMessage" class="error-message">{{errorMessage}}</div>
+                    <div *ngIf="registerForm.controls['firstName'].touched && registerForm.controls['firstName'].invalid">
+                        <span *ngIf="registerForm.controls['firstName'].errors?.['required']">First name is required.</span>
+                    </div>
+                    <input class="input" type="text" formControlName="firstName" placeholder="First Name">
+                    <div *ngIf="registerForm.controls['lastName'].touched && registerForm.controls['lastName'].invalid">
+                        <span *ngIf="registerForm.controls['lastName'].errors?.['required']">Last name is required.</span>
+                    </div>
+                    <input class="input" type="text" formControlName="lastName" placeholder="Last Name">
+                </div>
+                <div *ngIf="registerForm.controls['username'].touched && registerForm.controls['username'].invalid">
+                    <span *ngIf="registerForm.controls['username'].errors?.['required']">Email is required.</span>
+                    <span *ngIf="registerForm.controls['username'].errors?.['email']">Please enter a valid email.</span>
+                </div>
+                <input class="input" type="email" formControlName="username" placeholder="Email">
+                <div *ngIf="registerForm.controls['password'].touched && registerForm.controls['password'].invalid">
+                    <span *ngIf="registerForm.controls['password'].errors?.['required']">Password is required.</span>
+                    <span *ngIf="registerForm.controls['password'].errors?.['minlength']">Password must be at least 8 characters long.</span>
+                </div>
+                <input class="input" type="password" formControlName="password" placeholder="Password">
+                <div *ngIf="registerForm.controls['confirmPassword'].touched && registerForm.controls['confirmPassword'].invalid">
+                    <span *ngIf="registerForm.controls['confirmPassword'].errors?.['required']">Confirm password is required.</span>
+                    <span *ngIf="registerForm.controls['confirmPassword'].errors?.['mismatch']">Passwords do not match.</span>
+                </div>
+                <input class="input" type="password" formControlName="confirmPassword" placeholder="Confirm Password">
+                <button class="register-button">Register</button>
+            </div>
+        </form>
+</div>
