@@ -54,6 +54,14 @@
     font-family: 'Inter', sans-serif;
 }
 
+.register-form-input div {
+    font-size: 14px;
+    align-self: flex-start;
+    text-align: left;
+    color: red;
+    min-width: 161px;
+}
+
 .double-input {
     width: 333px;
     display: flex;
