@@ -47,6 +47,31 @@
     font-size: 96px;
     font-weight: 600;
     color: #FFFFFF;
+    overflow: hidden;
+    white-space: nowrap; 
+    border-right: 3px solid white;
+    animation: typing 1.5s steps(40, end) forwards, blink-caret 1.5s step-end forwards;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    100%, 100% { border-color: transparent; }
+    50% { border-color: white; }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        transform: translateY(1000%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    } 
 }
 
 .divider {
@@ -54,12 +79,14 @@
     height: 1px;
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    animation: typing 1.5s steps(40, end) forwards;
 }
 
 .subtitle {
     font-size: 24px;
     color: #FFFFFF;
     max-width: 400px;
+    animation: slideInFromLeft 1s;
 }
 
 .title, .subtitle, .button {
@@ -80,4 +107,10 @@
     justify-content: center;
     align-items: center;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transition: background-color 0.3s;
+    animation: slideInFromLeft 1.5s;
+
+    &:hover {
+        background-color: #A5B1D6;
+    }
 }
