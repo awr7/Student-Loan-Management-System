@@ -1,0 +1,83 @@
+.background-video {
+    position: absolute;
+    overflow: hidden;
+    right: 0;
+    object-fit: cover;
+    width: auto;
+    min-width: 100%;
+    height: 100%;
+    z-index: -1000;
+}
+
+.bigCircle {
+    position: absolute;
+    top: 138px;
+    left: 238px;
+    width: 708px;
+    height: 708px;
+    background: linear-gradient(180deg, rgba(190, 199, 230, 0.37) 0%, rgba(115, 115, 115, 0) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -999;
+}
+
+.smallCircle {
+    width: 540px;
+    height: 540px;
+    background: linear-gradient(180deg, rgba(190, 199, 230, 0.37) 0%, rgba(115, 115, 115, 0) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    display: flex;
+    flex-direction: column;    
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+.title {
+    font-size: 96px;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.divider {
+    width: 278px;
+    height: 1px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.subtitle {
+    font-size: 24px;
+    color: #FFFFFF;
+    max-width: 400px;
+}
+
+.title, .subtitle, .button {
+    text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.button {
+    width: 206px;
+    height: 54px;
+    background-color: #BEC7E6;
+    color: #FFFFFF;
+    font-size: 24px;
+    font-weight: 600;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
