@@ -8,12 +8,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.angelrosario.backend.appuser.AppUserService;
 import com.angelrosario.backend.security.CustomAuthenticationFailureHandler;
 import com.angelrosario.backend.security.CustomAuthenticationSuccessHandler;
+import com.angelrosario.backend.security.JWTFilter;
 
 import lombok.AllArgsConstructor;
 
@@ -24,8 +26,8 @@ public class WebSecurityConfig {
     
     private final AppUserService appUserService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final CustomAuthenticationFailureHandler CustomAuthenticationFailureHandler;
-    private final CustomAuthenticationSuccessHandler CustomAuthenticationSuccessHandler;
+    private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
+    private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -35,10 +37,11 @@ public class WebSecurityConfig {
                                 .requestMatchers("/api/v*/registration/**").permitAll()
                                 .anyRequest().authenticated()
                 )
-                .formLogin(withDeafults -> withDeafults
-                .successHandler(CustomAuthenticationSuccessHandler)
-                .failureHandler(CustomAuthenticationFailureHandler)
-                .permitAll());
+                .formLogin(withDefaults -> withDefaults
+                .successHandler(customAuthenticationSuccessHandler)
+                .failureHandler(customAuthenticationFailureHandler)
+                .permitAll())
+                .addFilterBefore(new JWTFilter(appUserService), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

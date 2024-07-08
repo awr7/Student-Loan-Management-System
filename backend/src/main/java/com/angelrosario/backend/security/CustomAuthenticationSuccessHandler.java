@@ -18,8 +18,18 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+        String token = JwtUtil.generateToken(authentication.getName());
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json");
-        response.getWriter().write(objectMapper.writeValueAsString("authentication successful"));
+        response.getWriter().write(objectMapper.writeValueAsString(new AuthenticationResponse(token)));
+    }
+
+    private static class AuthenticationResponse {
+        @SuppressWarnings("unused")
+        public String token;
+
+        public AuthenticationResponse(String token) {
+            this.token = token;
+        }
     }
 }

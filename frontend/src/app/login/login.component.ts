@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string | null = null;
 
-  constructor() {
+  constructor(private router: Router) {
     this.loginForm = new FormGroup({
       username: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl('')
@@ -50,7 +51,9 @@ export class LoginComponent {
           console.error('Login failed:', errorMessage);
         } else if (response.ok) {
           const data = await response.json();
+          localStorage.setItem('jwt', data.token);
           console.log('Login successful:', data);
+          this.router.navigate(['/']);
         }
       }
     } catch (error) {
